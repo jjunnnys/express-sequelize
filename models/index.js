@@ -1,3 +1,7 @@
+/* 
+    싱크 역활 
+*/
+
 const Sequelize = require('sequelize');
 const path = require('path');
 const fs = require('fs');
