@@ -45,3 +45,37 @@ exports.get_products_detail = (req, res) => {
     res.render('admin/detail.html', { product });
   });
 };
+
+exports.get_products_edit = (req, res) => {
+  //기존에 폼에 value안에 값을 셋팅하기 위해 만든다.
+  models.Products.findByPk(req.params.id).then((product) => {
+    res.render('admin/write.html', { product: product });
+  });
+};
+
+exports.post_products_edit = (req, res) => {
+  models.Products.update(
+    // 데이터
+    {
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+    },
+    // 조건을 작성
+    {
+      where: { id: req.params.id },
+    }
+  ).then(() => {
+    res.redirect(`/admin/products/detail/${req.params.id}`);
+  });
+};
+
+exports.get_products_delete = (req, res) => {
+  models.Products.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }).then(() => {
+    res.redirect('/admin/products');
+  });
+};
