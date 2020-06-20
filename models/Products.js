@@ -1,13 +1,12 @@
 /* 
     create table Products
 */
-const { sequelize } = require('.');
 
 module.exports = (sequelize, DataTypes) => {
   const Products = sequelize.define('Products', {
     id: {
       type: DataTypes.INTEGER,
-      primarykey: true,
+      primaryKey: true,
       autoIncrement: true,
     },
     name: {

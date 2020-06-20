@@ -27,9 +27,16 @@ const sequelize = new Sequelize(
 );
 
 let db = [];
-fs.readdirSync(__dirname).filter((file) => {
-  return file.indexOf('.js') && file !== 'index.js'; // index.js 를 제외하고
-});
+
+// 테이블 생성
+fs.readdirSync(__dirname)
+  .filter((file) => {
+    return file.indexOf('.js') && file !== 'index.js'; // index.js 를 제외하고
+  })
+  .forEach((file) => {
+    var model = sequelize.import(path.join(__dirname, file));
+    db[model.name] = model;
+  });
 
 Object.keys(db).forEach((modelName) => {
   if ('associate' in db[modelName]) {
