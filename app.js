@@ -44,6 +44,7 @@ class App {
       })
       .then(() => {
         console.log('👉DB Sync complete. (DB 동기화가 완료되었습니다.)'); // ex. 프로덕츠 모델을 만들면 프로덕츠 테이블을 생성함
+        return db.sequelize.sync();
       })
       .catch((err) => {
         console.error(
